@@ -13,10 +13,15 @@ public class ColectivoJamApiApplication {
     String target;
 
     @RestController
-    class ColectivoJamApiController {
+    class HelloworldController {
             @GetMapping("/")
             String hello() {
                     return "Hello " + target + "!";
+            }
+            
+            @GetMapping("/auto-deploy")
+            String autoDeploy() {
+                    return "Hello " + target + " with auto-deploy!";
             }
     }
     
