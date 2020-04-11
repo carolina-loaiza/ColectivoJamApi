@@ -18,11 +18,6 @@ public class ColectivoJamApiApplication {
             String hello() {
                     return "Hello " + target + "!";
             }
-            
-            @GetMapping("/auto-deploy")
-            String autoDeploy() {
-                    return "Hello " + target + " with auto-deploy!";
-            }
     }
     
 	public static void main(String[] args) {
