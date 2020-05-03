@@ -10,7 +10,7 @@ import com.google.cloud.Timestamp;
 @EqualsAndHashCode
 public class Bands {
 	private String id;
-	private ArrayList<Albums> albums;
+	private ArrayList<String> albums;
 	private String email;
 	private ArrayList<String> genres; 
 	private String image;

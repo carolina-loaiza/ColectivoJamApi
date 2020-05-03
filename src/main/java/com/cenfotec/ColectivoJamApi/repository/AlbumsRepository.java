@@ -20,45 +20,46 @@ import com.google.cloud.firestore.WriteResult;
 
 @SuppressWarnings("unused")
 public class AlbumsRepository {
-	private Firestore db;
-	private String collectionBands = "albums";
-	
-	public AlbumsRepository() {
-		db = Connect.getDB();
-	}
+	private String collectionAlbums = "albums";
 	
 	public String save(Albums newAlbum) {
-		DocumentReference addedDocRef = db.collection(collectionBands).document();
+		Firestore db = Connect.getDB();
+		DocumentReference addedDocRef = db.collection(collectionAlbums).document();
 		ApiFuture<WriteResult> future = addedDocRef.set(newAlbum);
 
 		return addedDocRef.getId();
 	}
 
 	public List<Albums> findAll() {
-		ApiFuture<QuerySnapshot> future = db.collection(collectionBands).get();
+		Firestore db = Connect.getDB();
+		ApiFuture<QuerySnapshot> future = db.collection(collectionAlbums).get();
 		List<Albums> albums = new ArrayList<>();
 		List<QueryDocumentSnapshot> documents = null;
 
 		try {
 			documents = future.get().getDocuments();
+			System.out.print(documents.toString());
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			return albums;
 		} catch (ExecutionException e) {
 			e.printStackTrace();
+			return albums;
 		}
-
+		System.out.print("ke!");
 		for (QueryDocumentSnapshot document : documents) {
 			Albums toAlbum = document.toObject(Albums.class);
 			toAlbum.setId(document.getId());
 			albums.add(toAlbum);
 		}
-
+		System.out.print(albums);
 		return albums;
 	}
 
 	public Albums findByName(String checkName) throws InterruptedException, ExecutionException, Exception {
+		Firestore db = Connect.getDB();
 		Albums toAlbum = null;
-		CollectionReference albums = db.collection(collectionBands);
+		CollectionReference albums = db.collection(collectionAlbums);
 
 		Query albumQuery = albums.whereEqualTo("name", checkName);
 		ApiFuture<QuerySnapshot> querySnapshot = albumQuery.get();
@@ -75,7 +76,8 @@ public class AlbumsRepository {
 	}
 
 	public String delete(String checkName) throws InterruptedException, ExecutionException, Exception {
-		CollectionReference albums = db.collection(collectionBands);
+		Firestore db = Connect.getDB();
+		CollectionReference albums = db.collection(collectionAlbums);
 		
 		Query albumQuery = albums.whereEqualTo("name", checkName);
 		ApiFuture<QuerySnapshot> querySnapshot = albumQuery.get();

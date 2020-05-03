@@ -19,14 +19,10 @@ import com.google.cloud.firestore.WriteResult;
 
 @SuppressWarnings("unused")
 public class BandsRepository {
-	private Firestore db;
 	private String collectionBands = "bands";
 	
-	public BandsRepository() {
-		db = Connect.getDB();
-	}
-	
 	public String save(Bands newBands) {
+		Firestore db = Connect.getDB();
 		DocumentReference addedDocRef = db.collection(collectionBands).document();
 		ApiFuture<WriteResult> future = addedDocRef.set(newBands);
 
@@ -34,6 +30,7 @@ public class BandsRepository {
 	}
 
 	public List<Bands> findAll() {
+		Firestore db = Connect.getDB();
 		ApiFuture<QuerySnapshot> future = db.collection(collectionBands).get();
 		List<Bands> bands = new ArrayList<>();
 		List<QueryDocumentSnapshot> documents = null;
@@ -56,6 +53,7 @@ public class BandsRepository {
 	}
 
 	public Bands findByName(String checkName) throws InterruptedException, ExecutionException, Exception {
+		Firestore db = Connect.getDB();
 		Bands toBands = null;
 		CollectionReference bands = db.collection(collectionBands);
 
@@ -74,6 +72,7 @@ public class BandsRepository {
 	}
 
 	public String delete(String checkName) throws InterruptedException, ExecutionException, Exception {
+		Firestore db = Connect.getDB();
 		CollectionReference bands = db.collection(collectionBands);
 		
 		Query bandsQuery = bands.whereEqualTo("name", checkName);

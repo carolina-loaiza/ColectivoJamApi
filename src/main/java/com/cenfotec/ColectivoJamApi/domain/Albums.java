@@ -13,6 +13,7 @@ public class Albums {
 	private ArrayList<String> genres;
 	private String cover;
 	private String name;
+	private String band;
 	private Timestamp dateCreated;
 	
 	public Albums() {}
