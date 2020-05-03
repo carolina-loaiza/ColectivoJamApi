@@ -1,7 +1,7 @@
 package com.cenfotec.ColectivoJamApi.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import com.google.cloud.Timestamp;
@@ -15,7 +15,7 @@ public class Bands {
 	private ArrayList<String> genres; 
 	private String image;
 	private String intro;
-	private HashMap<String, String> links;
+	private Map<String, String> links;
 	private String name;
 	private Timestamp dateCreated;
 	
