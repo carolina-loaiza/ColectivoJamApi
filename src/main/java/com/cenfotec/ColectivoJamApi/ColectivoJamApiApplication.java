@@ -1,27 +1,17 @@
 package com.cenfotec.ColectivoJamApi;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.io.IOException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import com.cenfotec.ColectivoJamApi.connect.Connect;
 
 @SpringBootApplication
 public class ColectivoJamApiApplication {
-	
-    @Value("${TARGET:World}")
-    String target;
 
-    @RestController
-    class HelloworldController {
-            @GetMapping("/")
-            String hello() {
-                    return "Hello " + target + "!";
-            }
-    }
-    
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ColectivoJamApiApplication.class, args);
+		Connect.initConnect();
 	}
-
 }
